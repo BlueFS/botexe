@@ -1,5 +1,5 @@
-# botexe
-This is the testing grounds for the botexe for Discord
+# BOTEXE
+This is the testing grounds for the botexe discord application
 
-# Things to Note
-error
+# What it can do:
+Literally nothing -- yet
