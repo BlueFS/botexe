@@ -1,10 +1,10 @@
 const { SlashCommandBuilder} = require('discord.js');
 
 module.exports = {
-  data: new SlashCommandBuilder()
-        .setname('dev')
-        .setDescription('Who to contact for help?'),
-  async execue(interaction) {
-    await interation.reply('Please Contact @Blue and or @SlipperyBooney :P);
-   },
+    data: new SlashCommandBuilder()
+        .setName('help')
+        .setDescription('Support'),
+    async execute(interaction) {
+        await interaction.reply('Contact BlueFS or SlipperyBooney on Discord');
+    },
 };
