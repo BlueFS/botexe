@@ -8,3 +8,4 @@ module.exports = {
         await interaction.reply('There is none right now. Bot Version: v1.1');
     },
 };
+//Please change the changelog before pushing a new update
