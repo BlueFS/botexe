@@ -1,0 +1,2 @@
+# Ignore config files (Contains secret keys)
+config.json
