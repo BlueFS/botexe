@@ -1,2 +1,6 @@
-# BOTEXE Python Edition
-This is just the beginning for coding a discord bot that runs off python.
+# BOTEXE Python edition
+## Description
+The BotExe Discord application is a first test at using Python for a discord bot. 
+This is the basis for a new bot which will operate as a doorbell.
+## Languages used:
+Literally Python

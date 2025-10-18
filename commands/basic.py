@@ -1,5 +1,5 @@
 import discord
-from discord import Embed
+from discord import app_commands, Embed
 
 # Basic commands
 
@@ -57,3 +57,34 @@ def dev(client, guildId):
     )
     async def dev_command(interaction: discord.Interaction):
         await interaction.response.send_message('Idk')
+
+def help(client, guildId):
+    @client.tree.command(
+    name='help',
+    description='Will tell you who to contact',
+    # remove line under later
+    guild=discord.Object(guildId)
+    )
+    async def help_command(interaction: discord.Interaction):
+        await interaction.response.send_message('Please contact BlueFS or SlipperyBooney')
+
+def bug(client, guildId):
+    @client.tree.command(
+    name='bug',
+    description='This doesn\'t work yet.',
+    # remove line under later
+    guild=discord.Object(guildId)
+    )
+    async def bug_command(interaction: discord.Interaction):
+        await interaction.response.send_message('NOT WORKING YET')
+
+def bugs(client, guildId):
+    @client.tree.command(
+    name='bugs',
+    description='Can be used to ping Slipperybooney.',
+    # remove line under later
+    guild=discord.Object(guildId)
+    )
+    @app_commands.describe(user='The user you want to ping.')
+    async def bugs_command(interaction: discord.Interaction, user: discord.User):
+        await interaction.response.send_message(f'{user.mention}')

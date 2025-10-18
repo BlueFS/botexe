@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from discord import app_commands
 import json
 from pathlib import Path
 import os
@@ -8,7 +7,7 @@ import sys
 
 # Allows other files to be imported from the command file
 current_dir = os.path.dirname(os.path.abspath(__file__))
-commands_dir = os.path.join(current_dir, 'commands')
+commands_dir = os.path.join(current_dir, 'commands') 
 
 sys.path.insert(0, commands_dir)
 
@@ -51,33 +50,11 @@ basic.cmds(client, guildId)
 
 basic.dev(client, guildId)
 
-@client.tree.command(
-    name='help',
-    description='Will tell you who to contact',
-    # remove line under later
-    guild=discord.Object(guildId)
-)
-async def help_command(interaction: discord.Interaction):
-    await interaction.response.send_message('Please contact BlueFS or SlipperyBooney')
+basic.help(client, guildId)
 
-@client.tree.command(
-    name='bug',
-    description='This doesn\'t work yet.',
-    # remove line under later
-    guild=discord.Object(guildId)
-)
-async def bug_command(interaction: discord.Interaction):
-    await interaction.response.send_message('NOT WORKING YET')
+basic.bug(client, guildId)
 
-@client.tree.command(
-    name='bugs',
-    description='Can be used to ping Slipperybooney.',
-    # remove line under later
-    guild=discord.Object(guildId)
-)
-@app_commands.describe(user='The user you want to ping.')
-async def bugs_command(interaction: discord.Interaction, user: discord.User):
-    await interaction.response.send_message(f'{user.mention}')
+basic.bugs(client, guildId)
 
 # Token secret goes here
 client.run(token)
