@@ -1,0 +1,8 @@
+How the file system should be formatted:
+Python-bot
+- bot-env
+- commands
+    - individual commands in their own consecutive files (whether it be .py or .txt)
+- botexe.py
+config.json
+README.md

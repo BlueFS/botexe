@@ -1,8 +1,18 @@
 import discord
 from discord.ext import commands
-from discord import app_commands, Embed
+from discord import app_commands
 import json
 from pathlib import Path
+import os
+import sys
+
+# Allows other files to be imported from the command file
+current_dir = os.path.dirname(os.path.abspath(__file__))
+commands_dir = os.path.join(current_dir, 'commands')
+
+sys.path.insert(0, commands_dir)
+
+from commands import basic
 
 # Try to open the json file to read the token data
 try:
@@ -32,47 +42,14 @@ async def on_ready():
     print(f'Logged in as {client.user}')
 
 
-# Commands
-@client.tree.command(
-     name='ping',
-     description='Responds with pong.',
-     # THE GUILDID IS ONLY WHEN TESTING WITH THE EXE SERVER
-     # REMOVE THE NEXT LINE WHEN OPENING COMMANDS TO EVERYONE
-     guild=discord.Object(guildId)
-)
-async def ping_command(interaction: discord.Interaction):
-    await interaction.response.send_message('Pong!')
+# Command links and names
+basic.greet(client, guildId)
 
-@client.tree.command(
-    name='cmds',
-    description='Lists the commands',
-    # remove line under later
-    guild=discord.Object(guildId)
-)
-async def cmds_command(interaction: discord.Interaction):
-    embed = Embed(
-        title="Commands",
-        description="Here are all the commands",
-        # This is the color on the side
-        color=0x000000
-    )
+basic.ping(client, guildId)
 
-    embed.add_field(name="/cmd", value="Displays all the commands.", inline=False)
-    embed.add_field(name="/ping", value="Replies with pong.", inline=False)
-    embed.add_field(name="/bug", value="NOT YET IMPLEMENTED -- Will allow users to submit bug reports.", inline=False)
-    embed.add_field(name="/dev", value="Idk.", inline=False)
-    embed.add_field(name="/bugs", value="Will bug slipperybooney.", inline=True)
+basic.cmds(client, guildId)
 
-    await interaction.response.send_message(embed=embed)
-
-@client.tree.command(
-    name='dev',
-    description='Idk, just says idk. This does not actually do anything',
-    # remove line under later
-    guild=discord.Object(guildId)
-)
-async def dev_command(interaction: discord.Interaction):
-    await interaction.response.send_message('Idk')
+basic.dev(client, guildId)
 
 @client.tree.command(
     name='help',
