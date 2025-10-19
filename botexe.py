@@ -8,10 +8,11 @@ import sys
 # Allows other files to be imported from the command file
 current_dir = os.path.dirname(os.path.abspath(__file__))
 commands_dir = os.path.join(current_dir, 'commands') 
+sounds_dir = os.path.join(current_dir, 'sounds')
 
 sys.path.insert(0, commands_dir)
 
-from commands import basic
+from commands import basic, bell
 
 # Try to open the json file to read the token data
 try:
@@ -41,7 +42,7 @@ async def on_ready():
     print(f'Logged in as {client.user}')
 
 
-# Command links and names
+# Commands from basic.py
 basic.greet(client, guildId)
 
 basic.ping(client, guildId)
@@ -56,5 +57,8 @@ basic.bug(client, guildId)
 
 basic.bugs(client, guildId)
 
-# Token secret goes here
+# Commands from bell.py
+bell.dingdong(client, guildId, sounds_dir)
+
+# Run the client
 client.run(token)
