@@ -9,7 +9,7 @@ Welcome user to the server.\
 Complete other tasks.
 
 ## How to activate the bot in the env to download dependencies:
-Type and enter '.\bot.env\Scripts\activate' into the terminal.\
+Type and enter `.\bot.env\Scripts\activate` into the terminal.\
 To run the actual .py file, hit the run button on the top right of the file or run with Python.
 
 ## Languages used:
