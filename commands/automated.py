@@ -23,7 +23,7 @@ def member_join(client):
 
                 await welcome_channel.send(f'Welcome {member.mention} to the server!')
                 print(f'{member.name} joined the server and was greeted.')
-                await log_channel.send(f'{member.name} joined the server on {date.today()} at {datetime.now()}.')
+                await log_channel.send(f'{member.name} joined the server on {datetime.now()} CST.')
         except:
             print('Error 3: Bot does not have permission to post in the channel!')
 
