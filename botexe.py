@@ -7,12 +7,13 @@ import sys
 
 # Allows other files to be imported from the command file
 current_dir = os.path.dirname(os.path.abspath(__file__))
+automated_dir = os.path.join(current_dir, 'automated')
 commands_dir = os.path.join(current_dir, 'commands') 
 sounds_dir = os.path.join(current_dir, 'sounds')
 
 sys.path.insert(0, commands_dir)
 
-from commands import basic, bell
+from commands import basic, bell, automated
 
 # Try to open the json file to read the token data
 try:
@@ -24,9 +25,9 @@ try:
         guildId = config_data["guildId"]
         print('Information loaded!')
 except FileNotFoundError: 
-    print('Critical error: File not found!')
+    print('Error 1: Critical error: File not found!')
 except json.JSONDecodeError:
-    print('Invalid format: File must be .json!')   
+    print('Error 2: Invalid format: File must be .json!')   
 
 # Define client and tree
 intents = discord.Intents.default()
@@ -40,7 +41,12 @@ async def on_ready():
     await client.tree.sync(guild=discord.Object(id=guildId))
     await client.tree.sync(guild=None)
     print(f'Logged in as {client.user}')
+    message = "Bot joined"
 
+# Commands from automated.py
+automated.member_join(client)
+
+automated.online(client)
 
 # Commands from basic.py
 basic.greet(client, guildId)

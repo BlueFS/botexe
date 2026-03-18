@@ -1,0 +1,6 @@
+Error 1: Error 1: Critical error: File not found!
+- Used in botexe.py when finding config.json file.
+Error 2: Invalid format: File must be .json!
+- Used in botexe.py when checking config file. It must be a .json.
+Error 3: Bot does not have permission to post in the channel!
+- Used in automated.py and shows up when bot doesn't have perms.
