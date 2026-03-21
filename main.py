@@ -35,19 +35,26 @@ client = commands.Bot(command_prefix='/', intents=intents)
 @client.event
 async def on_ready():
     # Register all commands
-        # Commands from automated.py
-    automated.member_join(client)
-    automated.online(client)
+    automated_commands = [
+        automated.member_join,
+        automated.online
+    ]
 
-    # Commands from basic.py
-    basic.greet(client, guildId)
-    basic.ping(client, guildId)
-    basic.cmds(client, guildId)
-    basic.dev(client, guildId)
-    basic.help_command_setup(client, guildId)
-    basic.bug(client, guildId)
-    basic.bugs(client, guildId)
-    basic.destruction(client, guildId)
+    for command in automated_commands:
+        command(client)
+
+    basic_commands = [
+        basic.greet,
+        basic.ping, 
+        basic.cmds, 
+        basic.dev, 
+        basic.help_command_setup, 
+        basic.bug, 
+        basic.bugs, 
+        basic.destruction
+    ]
+    for command in basic_commands:
+        command(client, guildId)
 
     # Commands from bell.py
     bell.dingdong(client, guildId, sounds_dir)

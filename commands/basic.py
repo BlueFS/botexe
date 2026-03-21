@@ -2,7 +2,6 @@ import discord
 from discord import app_commands, Embed
 
 # Basic commands
-
 def greet(client, guildId):
     @client.tree.command(
      name='hello',
