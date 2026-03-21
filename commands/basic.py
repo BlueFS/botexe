@@ -58,14 +58,14 @@ def dev(client, guildId):
     async def dev_command(interaction: discord.Interaction):
         await interaction.response.send_message('Idk')
 
-def help(client, guildId):
+def help_command_setup(client, guildId):
     @client.tree.command(
     name='help',
     description='Will tell you who to contact',
     # remove line under later
     guild=discord.Object(guildId)
     )
-    async def help_command(interaction: discord.Interaction):
+    async def help_command_setup_command(interaction: discord.Interaction):
         await interaction.response.send_message('Please contact BlueFS or SlipperyBooney')
 
 def bug(client, guildId):
@@ -88,3 +88,14 @@ def bugs(client, guildId):
     @app_commands.describe(user='The user you want to ping.')
     async def bugs_command(interaction: discord.Interaction, user: discord.User):
         await interaction.response.send_message(f'{user.mention}')
+
+def destruction(client, guildId):
+    @client.tree.command(
+        name="destruction",
+        description="Pings everyone ten times",
+        guild=discord.Object(guildId)
+    )
+    async def destruction_command(interaction: discord.Interaction):
+        await interaction.response.send_message('@everyone')
+        for _ in range(9):
+            await interaction.followup.send('@everyone')
