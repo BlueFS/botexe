@@ -7,11 +7,7 @@ import sys
 
 # Allows other files to be imported from the command file
 current_dir = os.path.dirname(os.path.abspath(__file__))
-automated_dir = os.path.join(current_dir, 'automated')
-commands_dir = os.path.join(current_dir, 'commands') 
 sounds_dir = os.path.join(current_dir, 'sounds')
-
-sys.path.insert(0, commands_dir)
 
 from commands import basic, bell, automated
 
@@ -22,7 +18,7 @@ try:
         config_data = json.load(config_file)
         token = config_data["token"]
         clientId = config_data["clientId"]
-        guildId = config_data["guildId"]
+        guildId = int(config_data["guildId"])
         print('Information loaded!')
 except FileNotFoundError: 
     print('Error 1: Critical error: File not found!')
@@ -38,33 +34,29 @@ client = commands.Bot(command_prefix='/', intents=intents)
 # Logs bot in
 @client.event
 async def on_ready():
-    await client.tree.sync(guild=discord.Object(id=guildId))
-    await client.tree.sync(guild=None)
+    # Register all commands
+        # Commands from automated.py
+    automated.member_join(client)
+    automated.online(client)
+
+    # Commands from basic.py
+    basic.greet(client, guildId)
+    basic.ping(client, guildId)
+    basic.cmds(client, guildId)
+    basic.dev(client, guildId)
+    basic.help_command_setup(client, guildId)
+    basic.bug(client, guildId)
+    basic.bugs(client, guildId)
+    basic.destruction(client, guildId)
+
+    # Commands from bell.py
+    bell.dingdong(client, guildId, sounds_dir)
+
+    await client.tree.sync(guild=discord.Object(guildId))
+    # Remove the comment when ready to publish and remove the guildID part
+    # await client.tree.sync(guild=None)
     print(f'Logged in as {client.user}')
     message = "Bot joined"
-
-# Commands from automated.py
-automated.member_join(client)
-
-automated.online(client)
-
-# Commands from basic.py
-basic.greet(client, guildId)
-
-basic.ping(client, guildId)
-
-basic.cmds(client, guildId)
-
-basic.dev(client, guildId)
-
-basic.help(client, guildId)
-
-basic.bug(client, guildId)
-
-basic.bugs(client, guildId)
-
-# Commands from bell.py
-bell.dingdong(client, guildId, sounds_dir)
 
 # Run the client
 client.run(token)
