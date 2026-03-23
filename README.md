@@ -12,22 +12,23 @@ Complete other planned automated tasks.
 Type and enter `.\bot.env\Scripts\activate` into the terminal.\
 To run the actual .py file, hit the run button on the top right of the file or run with Python.
 
-Python-bot/
-│
-├── commands/
-│ ├── init.py
-│ ├── automated.py
-│ ├── basic.py
-│ └── bell.py
-│
-├── sounds/
-│ └── doorbell.wav
-│
-├── config.json
-├── error_codes.txt
-├── main.py
-├── outline.txt
-└── README.md 
+## Schema
+Python-bot  
+│  
+├── commands  
+│ ├── init.py  
+│ ├── automated.py  
+│ ├── basic.py  
+│ └── bell.py  
+│  
+├── sounds  
+│ └── doorbell.wav  
+│  
+├── config.json  
+├── error_codes.txt  
+├── main.py  
+├── outline.txt  
+└── README.md  
 
 ## Languages used:
 Python
