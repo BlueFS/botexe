@@ -3,7 +3,6 @@ from discord.ext import commands
 import json
 from pathlib import Path
 import os
-import sys
 
 # Allows other files to be imported from the command file
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -19,6 +18,9 @@ try:
         token = config_data["token"]
         clientId = config_data["clientId"]
         guildId = int(config_data["guildId"])
+        welcomeId = int(config_data["welcomeId"])
+        generalId = int(config_data["generalId"])
+        logId = int(config_data["logId"])
         print('Information loaded!')
 except FileNotFoundError: 
     print('Error 1: Critical error: File not found!')
@@ -34,15 +36,10 @@ client = commands.Bot(command_prefix='/', intents=intents)
 # Logs bot in
 @client.event
 async def on_ready():
-    # Register all commands
-    automated_commands = [
-        automated.member_join,
-        automated.online
-    ]
 
-    for command in automated_commands:
-        command(client)
-
+    await automated.online(client, generalId)
+    automated.member_join(client, welcomeId, logId)
+    
     basic_commands = [
         basic.greet,
         basic.ping, 
