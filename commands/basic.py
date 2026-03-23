@@ -38,13 +38,22 @@ def cmds(client, guildId):
             # This is the color on the side
             color=0x000000
         )
-
-        embed.add_field(name="/cmd", value="Displays all the commands.", inline=False)
-        embed.add_field(name="/ping", value="Replies with pong.", inline=False)
-        embed.add_field(name="/bug", value="NOT YET IMPLEMENTED -- Will allow users to submit bug reports.", inline=False)
-        embed.add_field(name="/dev", value="Idk.", inline=False)
-        embed.add_field(name="/bugs", value="Will bug slipperybooney.", inline=True)
-
+        commands = [
+            'greet', 'ping', 'cmds', 'dev',
+            'help', 'bug', 'bugs', 'destruction'
+        ]
+        description = [
+            'Says hello.',
+            'Replies with pong.',
+            'Displays all cmds',
+            'Sends \"idk\"',
+            'Tells you who to contact',
+            'Nothing implemented yet. Kinda just a placeholder',
+            'Will ping a user of choice',
+            'Will ping everyone 10 times.'
+        ]
+        for i in range(len(commands)):
+            embed.add_field(name=commands[i], value=description[i], inline=False)
         await interaction.response.send_message(embed=embed)
 
 def dev(client, guildId):
