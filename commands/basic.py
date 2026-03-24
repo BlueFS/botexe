@@ -33,8 +33,8 @@ def cmds(client, guildId):
     )
     async def cmds_command(interaction: discord.Interaction):
         embed = Embed(
-            title="Commands",
-            description="Here are all the commands",
+            title='Commands',
+            description='Here are all the commands',
             # This is the color on the side
             color=0x000000
         )
@@ -46,7 +46,7 @@ def cmds(client, guildId):
             'Says hello.',
             'Replies with pong.',
             'Displays all cmds',
-            'Sends \"idk\"',
+            'Sends \'idk\'',
             'Tells you who to contact',
             'Nothing implemented yet. Kinda just a placeholder',
             'Will ping a user of choice',
@@ -99,11 +99,24 @@ def bugs(client, guildId):
 
 def destruction(client, guildId):
     @client.tree.command(
-        name="destruction",
-        description="Pings everyone ten times",
+        name='destruction',
+        description='Pings everyone ten times',
         guild=discord.Object(guildId)
     )
     async def destruction_command(interaction: discord.Interaction):
         await interaction.response.send_message('@everyone')
         for _ in range(9):
             await interaction.followup.send('@everyone')
+
+''' This is the start of a comment
+
+def INSERT NAME HERE (client, guildId):
+    @client.tree.command(
+        name='',
+        description='',
+        guild=discord.Object(guildId)
+    )
+    async def name(interaction: discord.Interaction):
+        await interaction.response.send_message('enter message here')
+
+'''

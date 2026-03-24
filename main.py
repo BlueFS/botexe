@@ -15,12 +15,13 @@ try:
     config_path = Path(__file__).parent / 'config.json'
     with open(config_path, 'r', encoding='utf-8') as config_file:
         config_data = json.load(config_file)
-        token = config_data["token"]
-        clientId = config_data["clientId"]
-        guildId = int(config_data["guildId"])
-        welcomeId = int(config_data["welcomeId"])
-        generalId = int(config_data["generalId"])
-        logId = int(config_data["logId"])
+        token = config_data['token']
+        clientId = config_data['clientId']
+        guildId = int(config_data['guildId'])
+        welcomeId = int(config_data['welcomeId'])
+        generalId = int(config_data['generalId'])
+        logId = int(config_data['logId'])
+        updatesId = int(config_data['updatesId'])
         print('Information loaded!')
 except FileNotFoundError: 
     print('Error 1: Critical error: File not found!')
@@ -49,6 +50,8 @@ async def on_ready():
         basic.bug, 
         basic.bugs, 
         basic.destruction
+        # Add a new command under this line
+        # Should be formatted as basic.command_name
     ]
     for command in basic_commands:
         command(client, guildId)
@@ -60,7 +63,7 @@ async def on_ready():
     # Remove the comment when ready to publish and remove the guildID part
     # await client.tree.sync(guild=None)
     print(f'Logged in as {client.user}')
-    message = "Bot joined"
+    message = 'Bot joined'
 
 # Run the client
 client.run(token)
