@@ -25,6 +25,7 @@ def member_join(client, welcomeId, logId):
         welcome_channel = client.get_channel(welcomeId)
         log_channel = client.get_channel(logId)
         # Check if the channel exists and the bot has permission to send messages
+        # TODO Make this cleaner
         try:
             if (welcome_channel and welcome_channel.permissions_for(welcome_channel.guild.me).send_messages 
                 and log_channel and log_channel.permissions_for(log_channel.guild.me).send_messages):

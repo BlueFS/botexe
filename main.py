@@ -35,6 +35,8 @@ intents.members = True
 client = commands.Bot(command_prefix='/', intents=intents)
 
 # Logs bot in
+# TODO Make sure not everything is in on_ready. If bot disconnects, it will redo this
+# and send all the messages again. We don't want that
 @client.event
 async def on_ready():
 
