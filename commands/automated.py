@@ -1,7 +1,6 @@
 # This holds the automated files that do not require user input
 import discord
-from discord.ext import commands
-from datetime import date, datetime
+from datetime import datetime
 
 intents = discord.Intents.default()
 
@@ -19,7 +18,7 @@ async def online(client, generalId):
         print(f'Error: {e}')
 
 # Welcome user
-def member_join(client, welcomeId, logId):
+def member_join(client):
     @client.event
     async def on_member_join(client, welcomeId, logId, member):
         welcome_channel = client.get_channel(welcomeId)

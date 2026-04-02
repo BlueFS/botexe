@@ -1,7 +1,10 @@
+# This file contains all the basic commands
 import discord
 from discord import app_commands, Embed
+from commands import qr
+import os
 
-# Basic commands
+# Responds with hello
 def greet(client, guildId):
     @client.tree.command(
      name='hello',
@@ -12,7 +15,9 @@ def greet(client, guildId):
     )
     async def hello_command(interaction: discord.Interaction):
         await interaction.response.send_message('Hello!')
+        print('Printed hello')
 
+# Responds with pong
 def ping(client, guildId):
     @client.tree.command(
         name='ping',
@@ -23,7 +28,9 @@ def ping(client, guildId):
     )
     async def ping_command(interaction: discord.Interaction):
         await interaction.response.send_message('Pong!')
+        print('Printed pong')
 
+# Lists the commands
 def cmds(client, guildId):
     @client.tree.command(
     name='cmds',
@@ -55,7 +62,10 @@ def cmds(client, guildId):
         for i in range(len(commands)):
             embed.add_field(name=commands[i], value=description[i], inline=False)
         await interaction.response.send_message(embed=embed)
+        print('Printed commands')
 
+
+# Literally nothing
 def dev(client, guildId):
     @client.tree.command(
     name='dev',
@@ -65,7 +75,9 @@ def dev(client, guildId):
     )
     async def dev_command(interaction: discord.Interaction):
         await interaction.response.send_message('Idk')
+        print('Printed IDK')
 
+# Tells you who to contact
 def help_command_setup(client, guildId):
     @client.tree.command(
     name='help',
@@ -75,7 +87,9 @@ def help_command_setup(client, guildId):
     )
     async def help_command_setup_command(interaction: discord.Interaction):
         await interaction.response.send_message('Please contact BlueFS or SlipperyBooney')
+        print('Told to contact moderator')
 
+# Nothing yet
 def bug(client, guildId):
     @client.tree.command(
     name='bug',
@@ -86,6 +100,7 @@ def bug(client, guildId):
     async def bug_command(interaction: discord.Interaction):
         await interaction.response.send_message('NOT WORKING YET')
 
+# Just pings a user
 def bugs(client, guildId):
     @client.tree.command(
     name='bugs',
@@ -96,7 +111,9 @@ def bugs(client, guildId):
     @app_commands.describe(user='The user you want to ping.')
     async def bugs_command(interaction: discord.Interaction, user: discord.User):
         await interaction.response.send_message(f'{user.mention}')
+        print('Bugged slipperybooney')
 
+# 10x pinger
 def destruction(client, guildId):
     @client.tree.command(
         name='destruction',
@@ -107,6 +124,23 @@ def destruction(client, guildId):
         await interaction.response.send_message('@everyone')
         for _ in range(9):
             await interaction.followup.send('@everyone')
+        print('Pinged everyone 10 times')
+
+# QR Code generator
+def qrcode(client, guildId):
+    @client.tree.command(
+        name='qrcode',
+        description='Creates a QR code based off a URL',
+        guild=discord.Object(guildId)
+    )
+    async def qr_command(interaction: discord.Interaction, url: str, name: str):
+        filename = qr.generate(url, name)
+        qr_bytes = qr.qr_storage[filename]
+        qr_bytes.seek(0)
+
+        file = discord.File(fp=qr_bytes, filename=filename)
+        await interaction.response.send_message(file=file)
+        print('QRCode generated')
 
 ''' This is the start of a comment
 
