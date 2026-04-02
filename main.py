@@ -21,7 +21,6 @@ try:
         welcomeId = int(config_data['welcomeId'])
         generalId = int(config_data['generalId'])
         logId = int(config_data['logId'])
-        updatesId = int(config_data['updatesId'])
         print('Information loaded!')
 except FileNotFoundError: 
     print('Error 1: Critical error: File not found!')
@@ -35,35 +34,43 @@ intents.members = True
 client = commands.Bot(command_prefix='/', intents=intents)
 
 # Logs bot in
+# TODO Make sure not everything is in on_ready. If bot disconnects, it will redo this
+# and send all the messages again. We don't want that
+Started = False
+
 @client.event
-async def on_ready():
+async def on_ready(): 
 
-    await automated.online(client, generalId)
-    automated.member_join(client, welcomeId, logId)
-    
-    basic_commands = [
-        basic.greet,
-        basic.ping, 
-        basic.cmds, 
-        basic.dev, 
-        basic.help_command_setup, 
-        basic.bug, 
-        basic.bugs, 
-        basic.destruction
-        # Add a new command under this line
-        # Should be formatted as basic.command_name
-    ]
-    for command in basic_commands:
-        command(client, guildId)
+    if Started == False:
+        await automated.online(client, generalId)
+        automated.member_join(client)
+        
+        basic_commands = [
+            basic.greet,
+            basic.ping, 
+            basic.cmds, 
+            basic.dev, 
+            basic.help_command_setup, 
+            basic.bug, 
+            basic.bugs, 
+            basic.destruction,
+            basic.qrcode
+            # Add a new command under this line
+            # Should be formatted as basic.command_name
+        ]
+        for command in basic_commands:
+            command(client, guildId)
 
-    # Commands from bell.py
-    bell.dingdong(client, guildId, sounds_dir)
+        # Commands from bell.py
+        bell.dingdong(client, guildId, sounds_dir)
 
-    await client.tree.sync(guild=discord.Object(guildId))
-    # Remove the comment when ready to publish and remove the guildID part
-    # await client.tree.sync(guild=None)
-    print(f'Logged in as {client.user}')
-    message = 'Bot joined'
+        await client.tree.sync(guild=discord.Object(guildId))
+        # Remove the comment when ready to publish and remove the guildID part
+        # await client.tree.sync(guild=None)
+        print(f'Logged in as {client.user}')
+        message = 'Bot joined'
+    else:
+        pass
 
 # Run the client
 client.run(token)

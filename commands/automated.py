@@ -1,7 +1,6 @@
 # This holds the automated files that do not require user input
 import discord
-from discord.ext import commands
-from datetime import date, datetime
+from datetime import datetime
 
 intents = discord.Intents.default()
 
@@ -19,12 +18,13 @@ async def online(client, generalId):
         print(f'Error: {e}')
 
 # Welcome user
-def member_join(client, welcomeId, logId):
+def member_join(client):
     @client.event
     async def on_member_join(client, welcomeId, logId, member):
         welcome_channel = client.get_channel(welcomeId)
         log_channel = client.get_channel(logId)
         # Check if the channel exists and the bot has permission to send messages
+        # TODO Make this cleaner
         try:
             if (welcome_channel and welcome_channel.permissions_for(welcome_channel.guild.me).send_messages 
                 and log_channel and log_channel.permissions_for(log_channel.guild.me).send_messages):
