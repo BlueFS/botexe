@@ -20,6 +20,8 @@ Python-bot
 │ ├── automated.py  
 │ ├── basic.py  
 │ └── bell.py  
+├── gui
+│ ├── gui.py  
 │  
 ├── sounds  
 │ └── doorbell.wav  
