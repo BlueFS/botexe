@@ -2,7 +2,10 @@ import discord
 from discord.ext import commands
 import json
 from pathlib import Path
+import threading
 import os
+
+Started = False
 
 # Allows other files to be imported from the command file
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -33,16 +36,17 @@ intents.message_content = True
 intents.members = True
 client = commands.Bot(command_prefix='/', intents=intents)
 
-# Logs bot in
-# TODO Make sure not everything is in on_ready. If bot disconnects, it will redo this
-# and send all the messages again. We don't want that
-Started = False
-
 @client.event
 async def on_ready(): 
+    print('Starting on ready command')
+    global Started
+    if not Started:
+        Started = True
 
-    if Started == False:
-        await automated.online(client, generalId)
+        try: 
+            await automated.online(client, generalId)
+        except Exception as e:
+            print(f'Error in automated.online: {e}')
         automated.member_join(client)
         
         basic_commands = [
@@ -73,4 +77,5 @@ async def on_ready():
         pass
 
 # Run the client
-client.run(token)
+if __name__ == "__main__":
+    client.run(token)
